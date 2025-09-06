@@ -4,8 +4,11 @@ import { Database } from "../database/database.js"
 const database = new Database()
 
 export function routerHandler(req, res) {
+
+    const path = req.url.split("/")
+
     const route = routes.find((route) => {
-        return route.method === req.method && route.path === req.url
+        return route.method === req.method && route.path === `/${path[1]}`
     })
 
     if (route) {

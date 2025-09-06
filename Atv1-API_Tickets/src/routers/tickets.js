@@ -1,5 +1,6 @@
 import { create } from "../crontollers/tickets/create.js"
 import { get } from "../crontollers/tickets/get.js"
+import { update } from "../crontollers/tickets/update.js"
 
 export const tickets = [
     {
@@ -11,5 +12,9 @@ export const tickets = [
         method: 'GET',
         path: '/tickets',
         controller: get
+    }, {
+        method: 'PUT',
+        path: '/tickets',
+        controller: update
     }
 ]
