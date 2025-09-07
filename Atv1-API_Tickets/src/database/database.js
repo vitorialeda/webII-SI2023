@@ -19,6 +19,12 @@ export class Database {
         fs.writeFile(DATABASSE_PATH, JSON.stringify(this.#database));
     };
 
+    #getIndex(table, item) {
+        this.#database[table].findIndex(element => {
+            return element === item
+        });
+    }
+
     insert(table, data) {
         if (Array.isArray(this.#database[table])) {
             this.#database[table].push(data);
@@ -29,25 +35,20 @@ export class Database {
     };
 
     select(table, key, param) {
-        const data = this.#database[table] ?? []
+        const data = this.#database[table] ?? [];
 
         if (param) {
             return data.filter(ticket => ticket[key] === param)
-        }
+        };
 
-        return data
+        return data;
     }
 
-    update(table, key, param, alteracoes) {
-        const ticket = this.select(table, key, param)[0];
-        const index = this.#database[table].findIndex(element => { return element.id === ticket.id });
+    update(table, id, alteracoes) {
+        const ticket = this.select(table, "id", id)[0];
+        const index = this.#getIndex(table, ticket);
 
-        if (index === -1) {
-            return 1;
-        };
-        if ('name' in alteracoes) {
-            return 1;
-        };
+        if (index === -1 || 'name' in alteracoes) return 1;
 
         const novo_ticket = { ...ticket, ...alteracoes, update_at: new Date() };
 
