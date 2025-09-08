@@ -1,7 +1,7 @@
 import { create } from "../crontollers/tickets/create.js"
 import { get } from "../crontollers/tickets/get.js"
 import { update } from "../crontollers/tickets/update.js"
-import { fechar } from "../crontollers/tickets/fechar.js"
+import { close } from "../crontollers/tickets/close.js"
 
 export const tickets = [
     {
@@ -22,6 +22,6 @@ export const tickets = [
     {
         method: 'PATCH',
         path: '/tickets',
-        controller: fechar
+        controller: close
     }
 ]
