@@ -39,12 +39,13 @@ export class Database {
     select(table, params) {
         const data = this.#database[table] ?? [];
 
-        console.log(params)
+        // console.log(params)
         if (params) {
-            for (const chave in params) {
-                console.log(`${chave}: ${params[chave]}`)
-            }
-            // return data.filter(item => item[key] === param)
+            const keys = Object.keys(params);
+
+            const filtered_data = data.filter(item => keys.every(key => item[key] === params[key]));
+
+            return filtered_data
         };
 
         return data;
