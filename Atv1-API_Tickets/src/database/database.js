@@ -60,4 +60,10 @@ export class Database {
         return this.#database[table][index];
     }
 
+    delete(table, id) {
+        const index = this.#getIndexByID(table, id);
+        this.#database[table].splice(index, 1);
+        this.#persist();
+    }
+
 }
