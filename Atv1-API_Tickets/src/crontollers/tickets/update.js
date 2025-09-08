@@ -3,7 +3,7 @@ export function update({ req, res, database }) {
     const alteracoes = req.body
     const resultado = database.update("tickets", id, alteracoes)
 
-    if (resultado === 1) {
+    if (resultado === null) {
         return res.writeHead(400).end("Houve um problema ao tentar atualizar o ticket.")
     }
 

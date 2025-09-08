@@ -19,10 +19,12 @@ export class Database {
         fs.writeFile(DATABASSE_PATH, JSON.stringify(this.#database));
     };
 
-    #getIndex(table, item) {
-        this.#database[table].findIndex(element => {
-            return element === item
+    #getIndexByID(table, id) {
+        const index = this.#database[table].findIndex(element => {
+            return element.id === id
         });
+
+        return index;
     }
 
     insert(table, data) {
@@ -46,9 +48,9 @@ export class Database {
 
     update(table, id, alteracoes) {
         const ticket = this.select(table, "id", id)[0];
-        const index = this.#getIndex(table, ticket);
+        const index = this.#getIndexByID(table, ticket.id);
 
-        if (index === -1 || 'name' in alteracoes) return 1;
+        if (index === -1 || 'name' in alteracoes) return null;
 
         const novo_ticket = { ...ticket, ...alteracoes, update_at: new Date() };
 
