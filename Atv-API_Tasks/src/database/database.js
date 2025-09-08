@@ -39,7 +39,6 @@ export class Database {
     select(table, params) {
         const data = this.#database[table] ?? [];
 
-        // console.log(params)
         if (params) {
             const keys = Object.keys(params);
 
@@ -52,10 +51,10 @@ export class Database {
     }
 
     update(table, id, alteracoes) {
-        const item = this.select(table, "id", id)[0];
+        const item = this.select(table, { id: id })[0];
         const index = this.#getIndexByID(table, item.id);
 
-        if (index === -1 || 'name' in alteracoes) return null;
+        if (index === -1) return null;
 
         const novo_item = { ...item, ...alteracoes, update_at: new Date() };
 

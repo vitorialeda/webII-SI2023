@@ -1,5 +1,6 @@
-import { create_task } from "../controllers/tasks/create_task.js"
-import { get_tasks } from "../controllers/tasks/get_tasks.js"
+import { create_task } from "../controllers/tasks/create_task.js";
+import { get_tasks } from "../controllers/tasks/get_tasks.js";
+import { update_tasks } from "../controllers/tasks/update.js";
 
 export const tasks = [
     {
@@ -11,5 +12,10 @@ export const tasks = [
         method: 'GET',
         path: '/tasks',
         controller: get_tasks
+    },
+    {
+        method: 'PUT',
+        path: '/tasks',
+        controller: update_tasks
     }
 ]
