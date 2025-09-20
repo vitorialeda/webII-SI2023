@@ -41,6 +41,11 @@ app.delete("/courses/:id", async (req, res) => {
   return res.status(201).send({ message: "Curso deletado com sucesso." });
 });
 
+app.get("/modules", async (_, res) => {
+  const modules = await knex("modules").select().orderBy("title");
+  return res.status(201).send(modules);
+});
+
 app.listen({ port: 3333 }).then(() => {
   console.log("HTTP server running");
 });
