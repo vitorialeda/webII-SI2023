@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "author": "Vitoria Leda",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "better-sql": "^1.0.5",
+    "fastify": "^5.6.1",
+    "knex": "^3.1.0",
+    "tsx": "^4.20.5"
+  }
 }
