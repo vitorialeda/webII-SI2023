@@ -8,6 +8,13 @@ interface Course {
   name: string;
 }
 
+interface Modules {
+  id: number;
+  title: string;
+  course_id: number;
+  description: string;
+}
+
 app.get("/", () => {
   return "Hello Web II";
 });
@@ -44,6 +51,30 @@ app.delete("/courses/:id", async (req, res) => {
 app.get("/modules", async (_, res) => {
   const modules = await knex("modules").select().orderBy("title");
   return res.status(201).send(modules);
+});
+
+app.post("/modules", async (req, res) => {
+  const { title, course_id, description } = req.body as Modules;
+  await knex("modules").insert({ title, course_id, description });
+  return res.status(201).send({
+    message: "Módulo adicionado com sucesso.",
+  });
+});
+
+app.put("/modules/:id", async (req, res) => {
+  const { id, title, course_id, description } = req.body as Modules;
+  await knex("modules").update({ title, course_id, description }).where({ id });
+
+  return res
+    .status(201)
+    .send({ message: "Módulo atualizado com sucesso." });
+});
+
+app.delete("/modules/:id", async (req, res) => {
+  const { id } = req.body as Modules;
+  await knex("modules").delete().where({ id });
+
+  return res.status(201).send({ message: "Curso deletado com sucesso." });
 });
 
 app.listen({ port: 3333 }).then(() => {
